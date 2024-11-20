@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domov - MORPHE</title>
+    <style>
+        /* Import the MUNI font */
+        @font-face {
+            font-family: 'Muni';
+            src: url('muni-bold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            color: #000;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Navigation Menu */
+        .navbar {
+            width: 100%;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar a {
+            font-family: Arial, sans-serif;
+            color: #0000dc;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            color: #f01928;
+            text-decoration: underline;
+        }
+
+        /* Header */
+        header {
+            padding: 20px;
+            width: 100%;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        header img {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: Arial, sans-serif;
+            color: #f01928;
+            font-size: 36px;
+            margin: 10px 0;
+        }
+
+        /* Section Content */
+        .content {
+            max-width: 800px;
+            padding: 20px;
+            color: #333;
+        }
+
+        .content h2 {
+            color: #0000dc;
+            font-size: 28px;
+            margin: 20px 0;
+        }
+
+        .content p {
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .content a {
+            color: #f01928;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Menu -->
+    <div class="navbar">
+        <a href="index.html">Domov</a>
+        <a href="about.html">O nás</a>
+        <a href="code.html">Quiz</a>
+    </div>
+
+    <!-- Header Section with Logo and Title -->
+    <header>
+         <!-- Make sure this file path is correct -->
+        <h1>MORPHE</h1>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="content">
+        <h2>Vítejte na stránce MORPHE!</h2>
+        <p>Naším cílem je pomoci studentům medicíny zlepšit latinskou anatomickou terminologii prostřednictvím inovativního interaktivního kvízu!</p>
+
+        <h2>Poděkování</h2>
+        <p>Vývoj aplikace byl umožněn díky odhodlání a vizi lektorů. Tento projekt nyní funguje nezávisle.</p>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; Lukáš Marônek 2024. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
