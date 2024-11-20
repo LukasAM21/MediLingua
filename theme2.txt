@@ -1,0 +1,15 @@
+articulatio, articulationis, f
+bursa, bursae, f
+capsula, capsulae, f
+cartilago, cartilaginis, f
+cubitus, cubiti, m
+discus, disci, m
+facies, faciei, f
+genu, genus, n
+labrum, labri, n
+ligamentum, ligamenti, n
+membrana, membranae, f
+meniscus, menisci, m
+recessus, recessus, m
+synovia, synoviae, f
+tendo, tendinis, m

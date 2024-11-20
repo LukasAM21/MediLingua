@@ -1,0 +1,14 @@
+aponeurosis, aponeurosis, f
+caput, capitis, n
+endomysium, endomysii, n
+fascia, fasciae, f
+fasciculus, fasciculi, m
+fibra, fibrae, f
+insertio, insertionis, f
+musculus, musculi, m
+origo, originis, f
+retinaculum, retinaculi, n
+sarcolemma, sarcolemmatis, n
+tendo, tendinis, m
+vagina, vaginae, f
+venter, ventris, m
