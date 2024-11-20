@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - MORPHE</title>
+    <style>
+        /* Import the MUNI font */
+        @font-face {
+            font-family: 'Muni';
+            src: url('muni-bold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            color: #000;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Navigation Menu */
+        .navbar {
+            width: 100%;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar a {
+            font-family: Arial, sans-serif;
+            color: #0000dc;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            color: #f01928;
+            text-decoration: underline;
+        }
+
+        /* Header */
+        header {
+            padding: 20px;
+            width: 100%;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        header img {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: 'Muni', Arial, sans-serif;
+            color: #f01928;
+            font-size: 36px;
+            margin: 10px 0;
+        }
+
+        /* Section Content */
+        .content {
+            max-width: 800px;
+            padding: 20px;
+            color: #333;
+        }
+
+        .content h2 {
+            color: #0000dc;
+            font-size: 28px;
+            margin: 20px 0;
+        }
+
+        .content p {
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Quiz Container */
+        #quizContainer {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        #quizContainer label, #quizContainer input, #quizContainer button {
+            display: block;
+            margin: 10px auto;
+            font-size: 16px;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Menu -->
+    <div class="navbar">
+        <a href="index.html">Domov</a>
+        <a href="about.html">O nás</a>
+        <a href="code.html">Quiz</a>
+    </div>
+
+    <!-- Header Section with Logo and Title -->
+    <header>
+        <img src="med-lg-eng-rgb.png" alt="MUNI MED Logo" /> <!-- Make sure this file path is correct -->
+        <h1>MORPHE Quiz</h1>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="content">
+        <h2>Zvolte si procvičované oblasti</h2>
+        <p>Vítejte v <strong>MORPHE</strong> Quizu! Vyberte deklinace, pády a témata, která chcete procvičovat.</p>
+
+        <h3>Zvolte deklinace:</h3>
+        <label><input type="checkbox" class="declensionCheckbox" value="I"> I. Deklinace</label><br>
+        <label><input type="checkbox" class="declensionCheckbox" value="II"> II. Deklinace</label><br>
+        <label><input type="checkbox" class="declensionCheckbox" value="III"> III. Deklinace</label><br>
+        <label><input type="checkbox" class="declensionCheckbox" value="IV"> IV. Deklinace</label><br>
+        <label><input type="checkbox" class="declensionCheckbox" value="V"> V. Deklinace</label><br>
+
+        <h3>Zvolte pády:</h3>
+        <label><input type="checkbox" class="caseCheckbox" value="Nominative"> Nominativ</label><br>
+        <label><input type="checkbox" class="caseCheckbox" value="Genitive"> Genitiv</label><br>
+        <label><input type="checkbox" class="caseCheckbox" value="Accusative"> Akusativ</label><br>
+        <label><input type="checkbox" class="caseCheckbox" value="Ablative"> Ablativ</label><br>
+
+        <h3>Zvolte témata:</h3>
+        <label><input type="checkbox" class="weekCheckbox" value="theme1"> Systema skeletale</label><br>
+        <label><input type="checkbox" class="weekCheckbox" value="theme2"> Systema musculare</label><br>
+
+        <button onclick="startQuiz()">Spustit Quiz!</button>
+    </div>
+
+    <!-- Quiz Interface -->
+    <div id="quizContainer">
+        <p id="randomWord"></p>
+        <p id="randomCaseNumber"></p>
+        <label for="userGuess">Vaše odpověď:</label>
+        <input type="text" id="userGuess" onkeydown="handleKeyDown(event)">
+        <button onclick="submitGuess()">Zkontrolovat</button>
+    </div>
+
+    <footer>
+        <p>&copy; MUNI MED 2024. All rights reserved. Last update: 4.11.2024 21:30</p>
+    </footer>
+
+    <script>
+        
+        function endsWithTwoConsonants(word) {
+            // Define a regular expression to match two consonants at the end of the word
+            var regex = /[bcdfghjklmnpqrstvwxyz]{2}$/i;
+
+            // Test the word against the regular expression
+            return regex.test(word);
+        }
+
+        function isIStem(word) {
+            // Define a regular expression to match the specified endings
+            var regex = /(al|ar|e)$/i;
+
+            // Test the word against the regular expression
+            return regex.test(word);
+        }
+        
+        function handleKeyDown(event) {
+                // Check if the pressed key is Enter (key code 13)
+                if (event.keyCode === 13) {
+                    // Call the function to submit the guess
+                    submitGuess();
+                }
+            }
+        
+        let wordsData = []; // To store words loaded from weeks
+        let selectedCases = [];
+        const numbers = ['Singular', 'Plural'];
+        let selectedDeclensions = [];
+        let currentWord, currentCase, currentNumber;
+
+        function startQuiz() {
+            selectedDeclensions = getSelectedDeclensions();
+            selectedWeeks = getSelectedWeeks();
+            selectedCases = getSelectedCases();
+            console.log("Selected cases:", selectedCases);
+
+            if (selectedDeclensions.length === 0 || selectedWeeks.length === 0 | selectedCases.length === 0) {
+                alert("Prosím, vyberte alespoň jednu deklinaci, jeden pád a jedno téma.");
+                return;
+            }
+
+            // Load words from selected week files
+            loadWeekData(selectedWeeks, () => {
+                getRandomWordAndCase();
+                document.getElementById('quizContainer').style.display = 'block';
+            });
+        }
+
+        function getSelectedDeclensions() {
+            return [...document.getElementsByClassName('declensionCheckbox')]
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+        }
+
+        function getSelectedWeeks() {
+            return [...document.getElementsByClassName('weekCheckbox')]
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+        }
+
+        function getSelectedCases() {
+            return [...document.getElementsByClassName('caseCheckbox')]
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+        }
+
+        function loadWeekData(weeks, callback) {
+            wordsData = [];
+            let loadedFiles = 0;
+
+            weeks.forEach(week => {
+                const weekFile = week.toLowerCase() + '.txt';
+                console.log("Fetching file:", weekFile); // Log the file being fetched
+                fetch(weekFile)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.text();
+                    })
+                    .then(data => {
+                        data.split('\n').forEach((line, index) => {
+                            line = line.trim(); // Trim whitespace
+                            if (line === '') return; // Skip empty lines
+
+                            const parts = line.split(',');
+                            // Log the line to see what we are getting
+                            console.log(`Line ${index + 1}: ${line}`); // Log the raw line
+
+                            // Check if the parts array has exactly 3 elements
+                            if (parts.length === 3) {
+                                const [word, genitive, gender] = parts.map(part => part.trim());
+                                wordsData.push({ word, genitive, gender });
+                            } else {
+                                console.warn(`Invalid line format at line ${index + 1} in ${weekFile}:`, parts); // Log invalid lines with their parts
+                            }
+                        });
+                        if (++loadedFiles === weeks.length) callback();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching week data:', error);  // Log errors in fetching
+                    });
+            });
+        }
+
+        function getRandomWordAndCase() {
+            clearInputField();
+        
+            const filteredWords = wordsData.filter(word => selectedDeclensions.includes(determineDeclension(word)));
+            if (filteredWords.length === 0) {
+                alert("Pro vybranou deklinaci nejsou v slovní zásobě žádná slova.");
+                return;
+            }
+        
+            const randomWord = filteredWords[Math.floor(Math.random() * filteredWords.length)];
+            // Check if selectedCases is not empty before choosing a case
+            if (selectedCases.length > 0) {
+                const randomCase = selectedCases[Math.floor(Math.random() * selectedCases.length)];
+                console.log("Chosen case:", randomCase); // Log the chosen case
+                const randomNumber = getRandomElement(numbers);
+    
+                currentWord = randomWord;
+                currentCase = randomCase;
+                currentNumber = randomNumber;
+                if (currentCase === "Nominative"){
+                    currentNumber = "Plural";
+                    console.log("Current case is", currentCase, "current number should be now plural and is:", currentNumber); // Log the chosen case
+                }
+
+                document.getElementById('randomWord').innerText = 'Slovo: ' + currentWord.word;
+                document.getElementById('randomCaseNumber').innerText = 'Pád a číslo: ' + currentCase + ' ' + currentNumber;
+                
+            } else {
+                console.error("No cases selected.");
+                alert("Vyberte alespoň jeden pád.");
+            }
+        }
+
+        function submitGuess() {
+            const userGuess = document.getElementById('userGuess').value.toLowerCase();
+            const correctAnswer = checkGuess();
+            if (userGuess === correctAnswer) {
+                alert("Správně!");
+            } else {
+                alert("Nesprávně. Správná odpověď je: " + correctAnswer);
+            }
+            getRandomWordAndCase();
+        }
+
+        function determineDeclension(word) {
+            if (word.genitive.endsWith("ei") && (word.word.endsWith("es"))) return "V";
+            if (word.genitive.endsWith("ae")) return "I";
+            if (word.genitive.endsWith("i")) return "II";
+            if (word.genitive.endsWith("is")) return "III";
+            if (word.genitive.endsWith("us")) return "IV";
+            return ''; // Return an empty string if no declension is found
+        }
+
+        function checkGuess() {
+            let trunk = currentWord.genitive.slice(0, -2);
+            if (determineDeclension(currentWord) === "II") {
+                trunk = currentWord.genitive.slice(0, -1);
+            }
+            let correctForm = '';
+            // (currentWord.gender === 'n' ? 'a' : 'i')
+            // Add logic for Nominative and Genitive
+            if (currentCase === 'Nominative') {
+                if (determineDeclension(currentWord) === "I"){
+                correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + "ae";
+                } else if (determineDeclension(currentWord) === "II"){
+                correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + (currentWord.gender === 'n' ? 'a' : 'i');
+                } else if (determineDeclension(currentWord) === "III"){
+                    if (currentNumber === 'Singular'){
+                        correctForm = currentWord.word
+                    } else if (isIStem(currentWord.word)){
+                            correctForm = trunk + "ia";
+                        } else if (currentWord.gender === "n") {correctForm = trunk + "a"
+                        } else {correctForm = trunk + "es"}
+                } else if (determineDeclension(currentWord) === "IV"){
+                correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + (currentWord.gender === 'n' ? 'ua' : 'us');
+                } else {correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + "es";
+                       }
+            } else if (currentCase === 'Genitive') {
+                if (determineDeclension(currentWord) === "I"){
+                correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "arum";
+                } else if (determineDeclension(currentWord) === "II"){
+                correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "orum";
+                } else if (determineDeclension(currentWord) === "III"){
+                    if (currentNumber === 'Singular'){
+                        correctForm = currentWord.genitive
+                    } else if (currentWord.word === "vas"){
+                        correctForm = "vasorum";
+                    } else if (isIStem(currentWord.word) || currentWord.word.endsWith("sis") || currentWord.word.endsWith("xis")){
+                            correctForm = trunk + 'ium';
+                        } else if (endsWithTwoConsonants(trunk) || currentWord.word === trunk + "is"){
+                            correctForm = trunk + 'ium';
+                        } else {correctForm = trunk + 'um'}
+                } else if (determineDeclension(currentWord) === "IV"){
+                correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "uum";
+                } else {correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "erum";
+                       }
+            } else if (currentCase === 'Accusative'){
+                if (determineDeclension(currentWord) === "I"){
+                correctForm = currentNumber === 'Singular' ? trunk + "am" : trunk + "as";
+                } else if (determineDeclension(currentWord) === "II"){
+                    if (currentWord.gender === "n"){
+                        correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + "a";
+                    } else {
+                correctForm = currentNumber === 'Singular' ? trunk + "um" : trunk + "os";
+                    }
+                } else if (determineDeclension(currentWord) === "III"){
+                    if (currentNumber === 'Singular'){
+                        if (currentWord.gender === "n"){
+                            correctForm = currentWord.word
+                        } else if (isIStem(currentWord.word) || currentWord.word.endsWith("sis") || currentWord.word.endsWith("xis")){
+                            correctForm = trunk + 'im';
+                        } else {
+                            correctForm = trunk + 'em';
+                        }
+                    } else {
+                        if (isIStem(currentWord.word)){
+                            correctForm = trunk + "ia";
+                        } else if (currentWord.gender === "n") {
+                            correctForm = trunk + "a";
+                        } else {
+                            correctForm = trunk + "es";
+                        }
+                    }
+                } else if (determineDeclension(currentWord) === "IV"){
+                    if (currentWord.gender === "n") {
+                        correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + "ua";
+                    } else {
+                        correctForm = currentNumber === 'Singular' ? trunk + "um" : trunk + "us";
+                    }
+                } else {correctForm = currentNumber === 'Singular' ? trunk + "em" : trunk + "es";
+                       }   
+            } else if (currentCase === 'Ablative') {
+                if (determineDeclension(currentWord) === "I") {
+                    correctForm = currentNumber === 'Singular' ? trunk + "a" : trunk + "is";
+                    console.log("Správny tvar pre abl", correctForm);
+                } else if (determineDeclension(currentWord) === "II") {
+                    correctForm = currentNumber === 'Singular' ? trunk + "o" : trunk + "is";
+                } else if (determineDeclension(currentWord) === "III") {
+                    if (currentNumber === 'Singular') {
+                        correctForm = isIStem(currentWord.word) ? trunk + "i" : trunk + "e";
+                    } else {
+                        correctForm = currentWord.word === "vas" ? "vasis" : trunk + "ibus";
+                    }
+                } else if (determineDeclension(currentWord) === "IV") {
+                    correctForm = currentNumber === 'Singular' ? trunk + "u" : trunk + "ibus";
+                } else { // For declension V or default case
+                    correctForm = currentNumber === 'Singular' ? trunk + "e" : trunk + "ebus";
+                }
+            }
+
+            return correctForm.toLowerCase();
+        }
+
+        function clearInputField() {
+            document.getElementById('userGuess').value = '';
+        }
+
+        function getRandomElement(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+    </script>
+</body>
+</html>
