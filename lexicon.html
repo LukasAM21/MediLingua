@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lexikon</title>
+    <title>Lexikon – MediLingua</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,25 +48,48 @@
         }
 
         h1 {
-            font-family: 'Garamond', 'Times New Roman', serif;
             color: #f01928;
             font-size: 36px;
         }
 
-        table {
+        .theme-container {
             width: 80%;
-            border-collapse: collapse;
             margin-top: 20px;
+        }
+
+        .theme-header {
+            background-color: #f01928;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .theme-content {
+            display: none;
+            overflow: hidden;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
         th, td {
             border: 1px solid #ccc;
             padding: 10px;
+            text-align: center;
         }
 
         th {
             background-color: #f01928;
-            color: #ffffff;
+            color: white;
         }
 
         tr:nth-child(even) {
@@ -92,24 +115,12 @@
 
     <!-- Header Section -->
     <header>
-        <h1>Lexikon</h1>
+        <h1>Lexikon MediLingua</h1>
     </header>
 
     <!-- Lexicon Container -->
-    <div class="content">
-        <h2>Seznam slov, které aplikace používá a jejich překlady do češtiny</h2>
-        <table id="lexiconTable">
-            <thead>
-                <tr>
-                    <th>Termín</th>
-                    <th>Genitiv & Gramatický rod</th>
-                    <th>Překlad</th>
-                </tr>
-            </thead>
-            <tbody id="lexiconBody">
-                <!-- Terms and translations will be loaded here -->
-            </tbody>
-        </table>
+    <div class="theme-container" id="themeContainer">
+        <!-- Themes will be dynamically added here -->
     </div>
 
     <footer>
@@ -117,43 +128,79 @@
     </footer>
 
     <script>
-        // List of themes
-        const themes = ['theme1', 'theme2']; // Add more as needed
+        const themes = [
+            { file: 'theme1', title: 'Systema skeletale' },
+            { file: 'theme2', title: 'Systema articulare' },
+            { file: 'theme3', title: 'Systema musculare' },
+            { file: 'theme4', title: 'Systema kardiovasculare' },
+            { file: 'theme5', title: 'Systema nervosum' },
+            { file: 'theme6', title: 'Systema respiratorium' },
+            { file: 'theme7', title: 'Systema gastrointestinale, hepar, lien et pancreas' },
+            { file: 'theme8', title: 'Systema urogenitale' },
+            { file: 'theme9', title: 'Systema endocrinum' },
+            { file: 'theme10', title: 'Systema sensorium' }
+        ];
 
         function loadLexicon() {
-            const lexiconBody = document.getElementById('lexiconBody');
-            lexiconBody.innerHTML = ''; // Clear previous content
+            const themeContainer = document.getElementById('themeContainer');
 
             themes.forEach((theme, index) => {
+                // Create theme header
+                const themeHeader = document.createElement('div');
+                themeHeader.className = 'theme-header';
+                themeHeader.textContent = theme.title;
+                themeContainer.appendChild(themeHeader);
+
+                // Create theme content container
+                const themeContent = document.createElement('div');
+                themeContent.className = 'theme-content';
+                themeContainer.appendChild(themeContent);
+
                 // Fetch the corresponding term and translation files
                 Promise.all([
-                    fetch(`${theme}.txt`).then(response => response.text()),
+                    fetch(`${theme.file}.txt`).then(response => response.text()),
                     fetch(`translations${index + 1}.txt`).then(response => response.text())
                 ]).then(([termsData, translationsData]) => {
                     const termsLines = termsData.trim().split('\n');
                     const translationsLines = translationsData.trim().split('\n');
 
-                    // Ensure each term has a translation
-                    termsLines.forEach((line, i) => {
-                        const termParts = line.split(',');
-                        const translation = translationsLines[i] || 'No translation available';
+                    // Create table element
+                    const table = document.createElement('table');
+                    table.innerHTML = `
+                        <thead>
+                            <tr>
+                                <th>Termín</th>
+                                <th>Genitiv & Rod</th>
+                                <th>Překlad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${termsLines.map((line, i) => {
+                                const termParts = line.split(',');
+                                const translation = translationsLines[i] || 'No translation available';
+                                if (termParts.length === 3) {
+                                    const [word, genitive, gender] = termParts.map(part => part.trim());
+                                    return `
+                                        <tr>
+                                            <td>${word}</td>
+                                            <td>${genitive}, ${gender}</td>
+                                            <td>${translation}</td>
+                                        </tr>
+                                    `;
+                                }
+                                return '';
+                            }).join('')}
+                        </tbody>
+                    `;
+                    themeContent.appendChild(table);
 
-                        if (termParts.length === 3) {
-                            const [word, genitive, gender] = termParts.map(part => part.trim());
-
-                            // Create a table row
-                            const row = document.createElement('tr');
-                            row.innerHTML = `
-                                <td>${word}</td>
-                                <td>${genitive}, ${gender}</td>
-                                <td>${translation}</td>
-                            `;
-                            lexiconBody.appendChild(row);
-                        }
+                    // Toggle visibility on header click
+                    themeHeader.addEventListener('click', () => {
+                        themeContent.style.display = themeContent.style.display === 'block' ? 'none' : 'block';
                     });
                 }).catch(error => {
-                    console.error(`Error loading ${theme}:`, error);
-                    lexiconBody.innerHTML += `<tr><td colspan="3">Error loading ${theme}</td></tr>`;
+                    console.error(`Error loading ${theme.file}:`, error);
+                    themeContent.innerHTML = `<p>Error loading ${theme.title}</p>`;
                 });
             });
         }
