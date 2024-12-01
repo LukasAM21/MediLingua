@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptomata - MediLingua</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #000;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar a {
+            font-family: 'Garamond', 'Times New Roman', serif;
+            color: #0000dc;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            color: #f01928;
+            text-decoration: underline;
+        }
+
+        header {
+            padding: 20px;
+            width: 100%;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Garamond', 'Times New Roman', serif;
+            color: #f01928; /* Retains the original red color */
+            font-size: 36px;
+            margin: 10px 0;
+        }
+
+        /* Section Content */
+        .content {
+            max-width: 800px;
+            padding: 20px;
+            color: #333;
+        }
+
+        .content h2 {
+            font-family: 'Garamond', 'Times New Roman', serif;
+            color: #0000dc;
+            font-size: 28px;
+            margin: 20px 0;
+        }
+
+        .content p {
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .content a {
+            color: #f01928;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        .main-term {
+            background-color: #f01928;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 20px;
+        }
+
+        .main-term:hover {
+            background-color: #d01724;
+        }
+
+        .details {
+            display: none;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .details p {
+            margin: 5px 0;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Menu -->
+    <div class="navbar">
+        <a href="index.html">Domov</a>
+        <a href="about.html">O nás</a>
+        <a href="code.html">Quiz</a>
+        <a href="lexicon.html">Lexikon</a>
+        <a href="symptomata.html">Symptomata</a>
+    </div>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Symptomata</h1>
+    </header>
+
+    <!-- Symptomata Container -->
+    <div class="content" id="symptomataContainer">
+        <!-- Terms and etymology will be dynamically added here -->
+    </div>
+
+    <footer>
+        <p>&copy; Lukáš Marônek 2024. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function loadSymptomata() {
+            const container = document.getElementById('symptomataContainer');
+
+            fetch('symptomata.txt')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load symptomata data');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    const terms = data.trim().split('\n');
+
+                    terms.forEach(termData => {
+                        const [mainTerm, translation, language, examples] = termData.split(' – ');
+
+                        // Create main term header
+                        const termHeader = document.createElement('div');
+                        termHeader.className = 'main-term';
+                        termHeader.textContent = `${mainTerm} – ${translation} (${language})`;
+                        container.appendChild(termHeader);
+
+                        // Create details container
+                        const detailsDiv = document.createElement('div');
+                        detailsDiv.className = 'details';
+                        const exampleList = examples.split(';').map(example => `<p>${example}</p>`).join('');
+                        detailsDiv.innerHTML = exampleList;
+                        container.appendChild(detailsDiv);
+
+                        // Toggle details on header click
+                        termHeader.addEventListener('click', () => {
+                            detailsDiv.style.display = detailsDiv.style.display === 'block' ? 'none' : 'block';
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    container.innerHTML = `<p>Error loading symptomata data.</p>`;
+                });
+        }
+
+        window.onload = loadSymptomata;
+    </script>
+</body>
+</html>
