@@ -151,48 +151,51 @@
     </footer>
 
     <script>
-        function loadSymptomata() {
-            const container = document.getElementById('symptomataContainer');
+    function loadSymptomata() {
+        const container = document.getElementById('symptomataContainer');
 
-            fetch('symptomata.txt')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to load symptomata data');
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    const terms = data.trim().split('\n');
+        fetch('symptomata.txt')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to load symptomata data');
+                }
+                return response.text();
+            })
+            .then(data => {
+                const terms = data.trim().split('\n');
 
-                    terms.forEach(termData => {
-                        const [mainTerm, translation, language, examples] = termData.split(' – ');
+                terms.forEach(termData => {
+                    const [mainTerm, translation, language, examples] = termData.split(' – ');
 
-                        // Create main term header
-                        const termHeader = document.createElement('div');
-                        termHeader.className = 'main-term';
-                        termHeader.textContent = `${mainTerm} – ${translation} (${language})`;
-                        container.appendChild(termHeader);
+                    // Create main term header
+                    const termHeader = document.createElement('div');
+                    termHeader.className = 'main-term';
+                    termHeader.textContent = `${mainTerm} – ${translation} (${language})`;
+                    container.appendChild(termHeader);
 
-                        // Create details container
-                        const detailsDiv = document.createElement('div');
-                        detailsDiv.className = 'details';
-                        const exampleList = examples.split(';').map(example => `<p>${example}</p>`).join('');
-                        detailsDiv.innerHTML = exampleList;
-                        container.appendChild(detailsDiv);
+                    // Sort the examples alphabetically
+                    const sortedExamples = examples.split(';').map(example => example.trim()).sort();
 
-                        // Toggle details on header click
-                        termHeader.addEventListener('click', () => {
-                            detailsDiv.style.display = detailsDiv.style.display === 'block' ? 'none' : 'block';
-                        });
+                    // Create details container
+                    const detailsDiv = document.createElement('div');
+                    detailsDiv.className = 'details';
+                    detailsDiv.innerHTML = sortedExamples.map(example => `<p>${example}</p>`).join('');
+                    container.appendChild(detailsDiv);
+
+                    // Toggle details on header click
+                    termHeader.addEventListener('click', () => {
+                        detailsDiv.style.display = detailsDiv.style.display === 'block' ? 'none' : 'block';
                     });
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    container.innerHTML = `<p>Error loading symptomata data.</p>`;
                 });
-        }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                container.innerHTML = `<p>Error loading symptomata data.</p>`;
+            });
+    }
 
-        window.onload = loadSymptomata;
-    </script>
+    window.onload = loadSymptomata;
+</script>
+
 </body>
 </html>
