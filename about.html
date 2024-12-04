@@ -9,13 +9,7 @@
 <body>
 
     <!-- Navigation Menu -->
-    <div class="navbar">
-        <a href="index.html">Domov</a>
-        <a href="about.html">O nás</a>
-        <a href="code.html">Quiz</a>
-        <a href="lexicon.html">Lexikon</a>
-        <a href="symptomata.html">Symptomata</a>
-    </div>
+    <div id="navbar-placeholder"></div> <!-- Placeholder for the navbar -->
 
     <!-- Header Section with Logo and Title -->
     <header>
@@ -42,6 +36,16 @@
     <footer>
         <p>&copy; Lukáš Marônek 2024. All rights reserved.</p>
     </footer>
+
+    <script>
+    // Function to load the navbar from the navbar.html file
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+    </script>
 
 </body>
 </html>
