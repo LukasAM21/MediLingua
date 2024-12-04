@@ -63,22 +63,9 @@
                             });
                             element.textContent = translation;
                         });
-                        // Load correct text file content
-                        loadQuizData(lang);
                     })
                     .catch(error => console.error('Error loading language:', error));
             }
-
-            function loadQuizData(lang) {
-                const themeFile = lang === 'en' ? 'theme1-en.txt' : 'theme1-cz.txt';
-                fetch(themeFile)
-                    .then(response => response.text())
-                    .then(data => {
-                        console.log('Quiz data loaded:', data); // Handle data display
-                        // Add code to update the quiz options dynamically
-                    });
-            }
-
             // Load initial language from localStorage or default to 'cz'
             const savedLang = localStorage.getItem('selectedLanguage') || 'cz';
             languageSwitcher.value = savedLang;
