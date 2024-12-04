@@ -1,0 +1,20 @@
+{
+    "navbar": {
+        "home": "Home",
+        "about": "About Us",
+        "quiz": "Quiz",
+        "lexicon": "Lexicon",
+        "symptomata": "Symptomata"
+    },
+    "header": {
+        "lexicon": "MediLingua Lexicon",
+        "about": "About MediLingua",
+        "quiz": "Take the Quiz"
+    },
+    "content": {
+        "lexiconTitle": "List of Terms and Translations",
+        "aboutIntro": "Learn more about MediLingua and its mission.",
+        "quizIntro": "Test your knowledge with our interactive quiz."
+    },
+    "footer": "© Lukáš Marônek 2024. All rights reserved."
+}
