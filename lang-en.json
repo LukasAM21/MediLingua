@@ -1,5 +1,5 @@
 {
-    "navbar": {
+    "nav": {
         "home": "Home",
         "about": "About Us",
         "quiz": "Quiz",
@@ -13,6 +13,7 @@
     },
     "content": {
         "lexiconTitle": "List of Terms and Translations",
+        "lexiconIntro": "Here you will find thematically divided vocabulary.",
         "aboutIntro": "Learn more about MediLingua and its mission.",
         "quizIntro": "Test your knowledge with our interactive quiz."
     },
