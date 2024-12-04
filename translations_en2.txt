@@ -1,0 +1,15 @@
+joint
+purse
+capsule
+cartilage
+elbow
+disc
+surface
+knee
+rim
+ligament
+membrane
+meniscus, crescent-shaped body
+recess
+synovia, joint fluid
+tendon
