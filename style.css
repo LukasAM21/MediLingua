@@ -115,6 +115,38 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+.main-term {
+    background-color: #f01928;
+    color: white;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main-term:hover {
+    background-color: #d01724;
+}
+
+.details {
+    display: none;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+    transition: max-height 0.3s ease-out;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
 #quizContainer {
             display: none;
             margin-top: 20px;
