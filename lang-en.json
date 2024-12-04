@@ -1,21 +1,21 @@
 {
-    "nav": {
+    "navbar": {
         "home": "Home",
         "about": "About Us",
         "quiz": "Quiz",
         "lexicon": "Lexicon",
         "symptomata": "Symptomata"
     },
-    "header": {
-        "lexicon": "MediLingua Lexicon",
-        "about": "About MediLingua",
-        "quiz": "Take the Quiz"
+    "code": {
+        "headerTitle": "MediLingua Quiz",
+        "contentTitle": "Select Practice Areas",
+        "contentIntro": "Welcome to the MediLingua Quiz! Choose the declensions, cases, and topics you want to practice.",
+        "quizButton": "Start Quiz!"
     },
-    "content": {
-        "lexiconTitle": "List of Terms and Translations",
-        "lexiconIntro": "Here you will find thematically divided vocabulary.",
-        "aboutIntro": "Learn more about MediLingua and its mission.",
-        "quizIntro": "Test your knowledge with our interactive quiz."
+    "index": {
+        "headerTitle": "MediLingua",
+        "contentTitle": "Welcome to MediLingua!",
+        "contentIntro": "Our goal is to help medical students improve their Latin anatomical terminology through an innovative interactive quiz."
     },
     "footer": "© Lukáš Marônek 2024. All rights reserved."
 }
