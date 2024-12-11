@@ -153,15 +153,15 @@ tr:nth-child(even) {
         border: none; /* Remove borders around cells */
         position: relative;
         padding-left: 50%; /* Space for "pseudo-header" */
+        text-align: left; /* Align text to the left for readability */
     }
 
     td::before {
         content: attr(data-label); /* Use the "data-label" attribute for pseudo-header */
         position: absolute;
-        left: 0;
-        top: 0;
-        width: 45%;
-        padding-left: 10px;
+        left: 10px; /* Adjust for centering */
+        top: 50%; /* Vertically center the label */
+        transform: translateY(-50%); /* Correct vertical alignment */
         font-weight: bold;
         white-space: nowrap;
     }
