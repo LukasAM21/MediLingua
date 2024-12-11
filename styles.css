@@ -146,22 +146,32 @@ tr:nth-child(even) {
     }
 
     tr {
-        display: block; /* Stack rows for small screens */
+        display: flex; /* Use flex layout for rows */
+        flex-direction: column; /* Stack cells vertically */
         margin-bottom: 10px; /* Add spacing between rows */
         border-bottom: 1px solid #ddd; /* Row separator */
     }
 
     td {
         display: flex;
-        justify-content: space-between; /* Ensure alignment */
+        justify-content: space-between; /* Split content into left and right */
         border: none; /* Remove borders around cells */
         padding: 10px; /* Adjust padding */
+    }
+
+    td:first-child {
+        flex: 2; /* Make term and genitive column wider */
+    }
+
+    td:last-child {
+        flex: 1; /* Make translation column narrower */
     }
 
     td::before {
         content: attr(data-label); /* Use the "data-label" attribute for pseudo-header */
         font-weight: bold;
         white-space: nowrap;
+        margin-right: 10px; /* Space between label and value */
     }
 } 
 
