@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptomata Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        let terms = [];
+
+        // Load terms and meanings from the file
+        fetch('symptomata_quiz.txt')
+            .then(response => response.text())
+            .then(data => {
+                terms = data.trim().split('\n').map(line => {
+                    const [term, meaning] = line.split(' – ').map(item => item.trim());
+                    return { term, meaning };
+                });
+            })
+            .catch(error => console.error('Error loading quiz file:', error));
+
+        function startQuiz() {
+            const quizContainer = document.getElementById('quizContainer');
+            quizContainer.innerHTML = '';
+
+            // Shuffle terms and select 10 random unique ones
+            const shuffledTerms = [...terms].sort(() => 0.5 - Math.random());
+            const selectedTerms = shuffledTerms.slice(0, 10);
+
+            selectedTerms.forEach((questionTerm, index) => {
+                const questionContainer = document.createElement('div');
+                questionContainer.className = 'question';
+
+                // Add question text
+                const questionText = document.createElement('p');
+                questionText.textContent = `Q${index + 1}: What is the meaning of "${questionTerm.term}"?`;
+                questionContainer.appendChild(questionText);
+
+                // Prepare options (1 correct + 3 random incorrect)
+                const correctAnswer = questionTerm.meaning;
+                const incorrectOptions = terms
+                    .filter(item => item.meaning !== correctAnswer)
+                    .sort(() => 0.5 - Math.random())
+                    .slice(0, 3)
+                    .map(item => item.meaning);
+
+                const allOptions = [...incorrectOptions, correctAnswer].sort(() => 0.5 - Math.random());
+
+                // Add options to the question
+                allOptions.forEach(option => {
+                    const label = document.createElement('label');
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question${index}`;
+                    input.value = option;
+
+                    label.appendChild(input);
+                    label.appendChild(document.createTextNode(option));
+
+                    const optionContainer = document.createElement('div');
+                    optionContainer.className = 'option';
+                    optionContainer.appendChild(label);
+
+                    questionContainer.appendChild(optionContainer);
+                });
+
+                quizContainer.appendChild(questionContainer);
+            });
+
+            // Add submit button
+            const submitButton = document.createElement('button');
+            submitButton.textContent = 'Submit Quiz';
+            submitButton.onclick = submitQuiz;
+            quizContainer.appendChild(submitButton);
+        }
+
+        function submitQuiz() {
+            let score = 0;
+
+            const quizContainer = document.getElementById('quizContainer');
+            const questions = quizContainer.getElementsByClassName('question');
+
+            Array.from(questions).forEach((question, index) => {
+                const selectedOption = question.querySelector('input[type="radio"]:checked');
+                if (selectedOption && selectedOption.value === terms.find(t => t.term === selectedTerms[index].term).meaning) {
+                    score++;
+                }
+            });
+
+            alert(`Dosáhli jste ${score} z 10!`);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Symptomata Quiz</h1>
+    </header>
+
+    <main>
+        <p>Otestujte svoje znalosti terminologie příznaků z části <a href="symptomata.html">Symptomata</a>.</p>
+        <button onclick="startQuiz()">Spustit Quiz!</button>
+        <div id="quizContainer"></div>
+    </main>
+
+    <footer>
+        <p>&copy; Lukáš Marônek 2024. All rights reserved.</p>
+    </footer>
+</body>
+</html>
