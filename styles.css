@@ -171,14 +171,15 @@ tr:nth-child(even) {
 
 /* Quiz Container */
 #quizContainer {
-    display: block; /* Ensure it is visible */
-    margin-top: 20px;
+    display: block;
+    margin: 20px auto; /* Center the container horizontally */
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px; /* Increase width */
+    width: 80%; /* Reduce width for better centering */
+    max-width: 500px; /* Restrict the maximum width */
+    text-align: left; /* Align text inside the container */
 }
 
 .question {
@@ -198,23 +199,21 @@ tr:nth-child(even) {
 
 .option {
     display: flex;
-    align-items: center;
-    margin: 5px 0;
-    gap: 10px; /* Add space between radio button and text */
-    justify-content: flex-start; /* Ensure alignment starts from the left */
+    align-items: center; /* Align items vertically */
+    margin: 10px 0; /* Add spacing between options */
+    gap: 10px; /* Add space between the radio button and text */
 }
 
 .option input[type="radio"] {
-    flex-shrink: 0; /* Prevent shrinking of the radio button */
-    margin: 0;
-    width: 20px;
-    height: 20px;
+    flex-shrink: 0; /* Prevent the radio button from shrinking */
+    margin: 0; /* Remove extra margin */
+    width: 16px; /* Adjust size of the radio button */
+    height: 16px;
 }
 
 .option label {
-    flex-grow: 1; /* Allow text to occupy remaining space */
     font-size: 16px;
-    text-align: left; /* Align text to the left for readability */
+    text-align: left;
 }
 
 #quizContainer label,
