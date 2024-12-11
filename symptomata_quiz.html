@@ -6,6 +6,13 @@
     <title>Symptomata Quiz</title>
     <link rel="stylesheet" href="styles.css">
     <script>
+        fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+        
         let terms = [];
         let selectedTerms = []; // Move to global scope
 
