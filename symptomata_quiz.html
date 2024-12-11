@@ -8,20 +8,25 @@
     <script>
         let terms = [];
 
-        // Load terms and meanings from the file
-        fetch('symptomata_quiz.txt')
-            .then(response => response.text())
-            .then(data => {
-                terms = data.trim().split('\n').map(line => {
+        // Fetch terms and meanings from the file
+        async function loadTerms() {
+            try {
+                const response = await fetch('symptomata_quiz.txt');
+                const data = await response.text();
+                terms = data.trim().split('\\n').map(line => {
                     const [term, meaning] = line.split(' – ').map(item => item.trim());
                     return { term, meaning };
                 });
-            })
-            .catch(error => console.error('Error loading quiz file:', error));
+            } catch (error) {
+                console.error('Error loading quiz file:', error);
+            }
+        }
 
-        function startQuiz() {
+        async function startQuiz() {
+            await loadTerms(); // Ensure terms are loaded before starting the quiz
+
             const quizContainer = document.getElementById('quizContainer');
-            quizContainer.innerHTML = '';
+            quizContainer.innerHTML = ''; // Clear previous content
 
             // Shuffle terms and select 10 random unique ones
             const shuffledTerms = [...terms].sort(() => 0.5 - Math.random());
@@ -87,25 +92,23 @@
                 }
             });
 
-            alert(`Dosáhli jste ${score} z 10!`);
+            alert(`You scored ${score} out of 10!`);
         }
     </script>
 </head>
 <body>
-    <!-- Navigation Menu -->
-    <div id="navbar-placeholder"></div> <!-- Placeholder for the navbar -->
     <header>
         <h1>Symptomata Quiz</h1>
     </header>
-    <!-- Main Content Section -->
+
     <main>
-        <p id="contentIntro">Otestujte svoje znalosti terminologie příznaků z části <a href="symptomata.html">Symptomata</a>.</p>
-        <button onclick="startQuiz()">Spustit Quiz!</button>
+        <p>Test your knowledge of medical symptoms by starting the quiz below!</p>
+        <button onclick="startQuiz()">Start Quiz</button>
         <div id="quizContainer"></div>
     </main>
 
     <footer>
-        <p>&copy; Lukáš Marônek 2024. All rights reserved.</p>
+        <p>&copy; 2024 MediLingua. All rights reserved.</p>
     </footer>
 </body>
 </html>
