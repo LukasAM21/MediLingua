@@ -6,6 +6,7 @@
     <title>Symptomata Quiz</title>
     <link rel="stylesheet" href="styles.css">
     <script>
+
         fetch('navbar.html')
         .then(response => response.text())
         .then(data => {
@@ -50,22 +51,17 @@
             const quizContainer = document.getElementById('quizContainer');
             quizContainer.innerHTML = ''; // Clear previous content
 
-            // Shuffle terms and select 10 random unique ones
-            console.log('Shuffling terms...'); // Checkpoint
             const shuffledTerms = [...terms].sort(() => 0.5 - Math.random());
             selectedTerms = shuffledTerms.slice(0, 10);
-            console.log('Selected terms:', selectedTerms); // Log selected terms
 
             selectedTerms.forEach((questionTerm, index) => {
                 const questionContainer = document.createElement('div');
                 questionContainer.className = 'question';
 
-                // Add question text
                 const questionText = document.createElement('p');
                 questionText.textContent = `Q${index + 1}: What is the meaning of "${questionTerm.term}"?`;
                 questionContainer.appendChild(questionText);
 
-                // Prepare options (1 correct + 3 random incorrect)
                 const correctAnswer = questionTerm.meaning;
                 const incorrectOptions = terms
                     .filter(item => item.meaning !== correctAnswer)
@@ -76,7 +72,6 @@
                 const allOptions = [...incorrectOptions, correctAnswer].sort(() => 0.5 - Math.random());
                 console.log(`Q${index + 1} options:`, allOptions); // Log options for each question
 
-                // Add options to the question
                 allOptions.forEach(option => {
                     const label = document.createElement('label');
                     const input = document.createElement('input');
@@ -94,15 +89,17 @@
                     questionContainer.appendChild(optionContainer);
                 });
 
+                console.log(`Q${index + 1} container:`, questionContainer.outerHTML);
                 quizContainer.appendChild(questionContainer);
             });
 
-            // Add submit button
             const submitButton = document.createElement('button');
             submitButton.textContent = 'Submit Quiz';
             submitButton.onclick = submitQuiz;
             quizContainer.appendChild(submitButton);
-            console.log('Quiz generated successfully.'); // Checkpoint
+
+            console.log('Quiz generated successfully.');
+            console.log('Final quiz container:', quizContainer.innerHTML);
         }
 
         function submitQuiz() {
