@@ -141,36 +141,29 @@ tr:nth-child(even) {
         border: none; /* Remove borders for cleaner mobile look */
     }
 
-    thead, tbody, th, td, tr {
-        display: block; /* Stack rows for small screens */
-    }
-
-    th {
+    thead {
         display: none; /* Hide table headers on mobile */
     }
 
+    tr {
+        display: block; /* Stack rows for small screens */
+        margin-bottom: 10px; /* Add spacing between rows */
+        border-bottom: 1px solid #ddd; /* Row separator */
+    }
+
     td {
+        display: flex;
+        justify-content: space-between; /* Ensure alignment */
         border: none; /* Remove borders around cells */
-        position: relative;
-        padding-left: 50%; /* Space for "pseudo-header" */
-        text-align: left; /* Align text to the left for readability */
+        padding: 10px; /* Adjust padding */
     }
 
     td::before {
         content: attr(data-label); /* Use the "data-label" attribute for pseudo-header */
-        position: absolute;
-        left: 10px; /* Adjust for centering */
-        top: 50%; /* Vertically center the label */
-        transform: translateY(-50%); /* Correct vertical alignment */
         font-weight: bold;
         white-space: nowrap;
     }
-
-    tr {
-        margin-bottom: 10px; /* Add spacing between rows */
-        border-bottom: 1px solid #ddd; /* Row separator */
-    }
-}
+} 
 
 /* Quiz Container */
 #quizContainer {
