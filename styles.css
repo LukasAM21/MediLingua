@@ -171,14 +171,28 @@ tr:nth-child(even) {
 
 /* Quiz Container */
 #quizContainer {
-    display: none;
+    display: block; /* Ensure it is visible */
     margin-top: 20px;
     padding: 20px;
     background-color: #f9f9f9;
+    border: 2px solid red; /* Debugging border */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 500px;
+    max-width: 800px; /* Increase width */
+}
+
+.question {
+    border: 1px solid blue; /* Debugging border */
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.option {
+    margin: 5px 0;
+    text-align: left; /* Align options for better readability */
 }
 
 #quizContainer label,
@@ -187,6 +201,20 @@ tr:nth-child(even) {
     display: block;
     margin: 10px auto;
     font-size: 16px;
+}
+
+#quizContainer button {
+    background-color: #f01928;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#quizContainer button:hover {
+    background-color: #d01724;
 }
 
 /* Main Term for Collapsible Sections */
