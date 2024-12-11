@@ -33,6 +33,13 @@
     </footer>
 
     <script>
+        fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+        })
+        .catch(error => console.error('Error loading navbar:', error));
+        
         const themes = [
             { file: 'theme1', title: 'Systema skeletale' },
             { file: 'theme2', title: 'Systema articulare' },
