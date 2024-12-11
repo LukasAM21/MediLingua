@@ -201,6 +201,7 @@ tr:nth-child(even) {
     align-items: center;
     margin: 5px 0;
     gap: 10px; /* Add space between radio button and text */
+    justify-content: flex-start; /* Ensure alignment starts from the left */
 }
 
 .option input[type="radio"] {
@@ -299,11 +300,11 @@ footer {
     }
 
     .option {
-        flex-direction: column; /* Stack radio and text vertically on small screens */
-        text-align: center; /* Center align text */
+        flex-direction: row; /* Ensure radio and text are side by side */
+        text-align: left; /* Align text to the left */
     }
 
     .option label {
-        text-align: center; /* Center align text on small screens */
+        text-align: left; /* Ensure consistent left alignment */
     }
 }
