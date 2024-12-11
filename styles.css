@@ -22,6 +22,7 @@ body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 10px; /* Add spacing between items */
     box-sizing: border-box;
 }
 
@@ -32,6 +33,7 @@ body {
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
+    white-space: nowrap; /* Prevent breaking text */
 }
 
 .navbar a:hover {
@@ -230,13 +232,13 @@ footer {
 /* Responsive Design */
 @media (max-width: 600px) {
     .navbar {
-        flex-direction: column; /* Stack navbar items vertically */
-        align-items: center;
+        flex-wrap: wrap; /* Allow items to wrap onto new rows */
+        justify-content: space-evenly; /* Distribute items evenly */
     }
 
     .navbar a {
-        padding: 8px; /* Smaller padding for mobile */
-        font-size: 14px; /* Slightly smaller font size */
+        padding: 8px 12px; /* Slightly smaller padding for compact look */
+        font-size: 14px; /* Adjust font size for smaller screens */
     }
 
     .content {
