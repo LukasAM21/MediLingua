@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symptomata Quiz</title>
+    <title>MediLingua Symptomata Quiz</title>
     <link rel="stylesheet" href="styles.css">
     <script>
 
@@ -59,7 +59,7 @@
                 questionContainer.className = 'question';
 
                 const questionText = document.createElement('p');
-                questionText.textContent = `Q${index + 1}: What is the meaning of "${questionTerm.term}"?`;
+                questionText.textContent = `Otázka ${index + 1}: Jaký je význam "${questionTerm.term}"?`;
                 questionContainer.appendChild(questionText);
 
                 const correctAnswer = questionTerm.meaning;
@@ -70,7 +70,7 @@
                     .map(item => item.meaning);
 
                 const allOptions = [...incorrectOptions, correctAnswer].sort(() => 0.5 - Math.random());
-                console.log(`Q${index + 1} options:`, allOptions); // Log options for each question
+                console.log(`Otázka ${index + 1} možnosti:`, allOptions); // Log options for each question
 
                 allOptions.forEach(option => {
                     const label = document.createElement('label');
@@ -94,7 +94,7 @@
             });
 
             const submitButton = document.createElement('button');
-            submitButton.textContent = 'Submit Quiz';
+            submitButton.textContent = 'Zkontrolovat';
             submitButton.onclick = submitQuiz;
             quizContainer.appendChild(submitButton);
 
@@ -117,7 +117,7 @@
             });
 
             console.log(`Final score: ${score}`); // Log score
-            alert(`You scored ${score} out of 10!`);
+            alert(`Získali jste ${score} z 10!`);
         }
     </script>
 </head>
@@ -129,13 +129,13 @@
     </header>
 
     <main>
-        <p>Test your knowledge of medical symptoms by starting the quiz below!</p>
-        <button onclick="startQuiz()">Start Quiz</button>
+        <p id="contentIntro">Ověřte své porozumění klinické terminologii z části <a href="symptomata.html">Symptomata</a>.</p>
+        <button onclick="startQuiz()">Spustit Quiz!</button>
         <div id="quizContainer"></div>
     </main>
 
     <footer>
-        <p>&copy; 2024 MediLingua. All rights reserved.</p>
+        <p>&copy; Lukáš Marônek 2024. All rights reserved.</p>
     </footer>
 </body>
 </html>
