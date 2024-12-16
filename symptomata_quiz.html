@@ -6,32 +6,29 @@
     <title>MediLingua Symptomata Quiz</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-
         fetch('navbar.html')
         .then(response => response.text())
         .then(data => {
             document.getElementById('navbar-placeholder').innerHTML = data;
         })
         .catch(error => console.error('Error loading navbar:', error));
-        
+
         let terms = [];
         let selectedTerms = []; // Move to global scope
 
         // Fetch terms and meanings from the file
         async function loadTerms() {
-            console.log('Loading terms...'); // Checkpoint
+            console.log('Loading terms...');
             try {
                 const response = await fetch('symptomata_quiz.txt');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.text();
-                console.log('File fetched successfully:', data.slice(0, 100)); // Log first 100 characters
                 terms = data.trim().split('\n').map(line => {
                     const [term, meaning] = line.split(' – ').map(item => item.trim());
                     return { term, meaning };
                 });
-                console.log('Parsed terms:', terms.slice(0, 5)); // Log first 5 parsed terms
             } catch (error) {
                 console.error('Error loading quiz file:', error);
                 alert('Failed to load quiz data. Please try again later.');
@@ -39,17 +36,17 @@
         }
 
         async function startQuiz() {
-            console.log('Starting quiz...'); // Checkpoint
-            await loadTerms(); // Ensure terms are loaded before starting the quiz
+            console.log('Starting quiz...');
+            await loadTerms();
 
             if (terms.length === 0) {
                 alert('No quiz data available. Please check the file and try again.');
-                console.log('No terms loaded.'); // Checkpoint
                 return;
             }
 
             const quizContainer = document.getElementById('quizContainer');
             quizContainer.innerHTML = ''; // Clear previous content
+            quizContainer.classList.add('active'); // Show the quiz container
 
             const shuffledTerms = [...terms].sort(() => 0.5 - Math.random());
             selectedTerms = shuffledTerms.slice(0, 10);
@@ -70,8 +67,6 @@
                     .map(item => item.meaning);
 
                 const allOptions = [...incorrectOptions, correctAnswer].sort(() => 0.5 - Math.random());
-                console.log(`Otázka ${index + 1} možnosti:`, allOptions); // Log options for each question
-
                 allOptions.forEach(option => {
                     const label = document.createElement('label');
                     const input = document.createElement('input');
@@ -89,7 +84,6 @@
                     questionContainer.appendChild(optionContainer);
                 });
 
-                console.log(`Q${index + 1} container:`, questionContainer.outerHTML);
                 quizContainer.appendChild(questionContainer);
             });
 
@@ -99,11 +93,9 @@
             quizContainer.appendChild(submitButton);
 
             console.log('Quiz generated successfully.');
-            console.log('Final quiz container:', quizContainer.innerHTML);
         }
 
         function submitQuiz() {
-            console.log('Submitting quiz...'); // Checkpoint
             let score = 0;
 
             const quizContainer = document.getElementById('quizContainer');
@@ -116,7 +108,6 @@
                 }
             });
 
-            console.log(`Final score: ${score}`); // Log score
             alert(`Získali jste ${score} z 10!`);
         }
     </script>
@@ -132,7 +123,6 @@
         <h2 id="contentTitle">Zvolte si procvičované oblasti</h2>
         <p id="contentIntro">Ověřte své porozumění klinické terminologii z části <a href="symptomata.html">Symptomata</a>.</p>
     </div>
-
 
     <main>
         <button onclick="startQuiz()">Spustit Quiz!</button>
