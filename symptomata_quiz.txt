@@ -1,6 +1,8 @@
 abdominalgia – bolest břicha
+achromatopsia – barvoslepost
 amenorrhoea – nepřítomnost menstruace
 anaemia – málokrevnost
+anopia – úplná slepota
 anuria – absence tvorby moče
 arthralgia – bolest kloubů
 atelectasis – kolaps plíce
@@ -8,12 +10,15 @@ bronchiectasia – rozšíření průdušek
 cephalalgia – bolest hlavy
 cholemesis – zvracení žluči
 cholestasis – znemožnění odtoku žluče
+chromatopsia – abnormální vnímání barev
 chylothorax – nahromadění lymfy v cavum pleurae
 coccyxodynia – bolestivost kostrče
 coxalgia – bolest kyčle
 diarrhoea – průjem
+diplopia – dvojité vidění
 dorsalgia – bolest zad
 dysmenorrhoea – bolestivá menstruace
+dysopsia – obecný termín pro poruchu vidění
 dysuria – bolest při močení
 enterostasis – stagnace tráveniny ve střevě
 fluidothorax – všeobecný termín pro označení pleurálního výpotku
@@ -30,21 +35,28 @@ haemoptysis – vykašlávání krve z dýchací soustavy
 haemorrhagia – krvácení
 haemostasis – zastavení krvácení
 haemothorax – nahromadění krve v cavum pleurae
+hemianopsia – slepost poloviny zorního pole
+heteropsia – nerovnaké vidění očí
 hyperemesis – silné mnohočetné zvracení
+hyperopia – dalekozrakost
 leukorrhea – bílý vaginální výtok
 lymphostasis – zhoršení nebo zástava lymfatické drainage
 metastasis – objevení novotvaru na dalším místě
 myalgia – bolest svalů
+myopia – krátkozrakost
 nephrectasis – rozšíření pelvis renalis pro obstrukci
 neuralgia – nervová bolest
 nocturia – časté močení v noci
+nyktalopia – zhoršené vidění za šera nebo tmy
 odynophagia – bolest při polykání
 oliguria – snížená tvorba moče
 otorrhoea – výtok z ucha
 pertussis – černý kašel
+photopsia – pocit záblesků bez světelné stimulace
 pleurodynia – bolestivost pohrudnice, poplicnice
 pneumothorax – nahromadění vzduchu v cavum pleurae
 polyuria – nadměrné močení
+presbyopia – stařecká dalekozrakost
 proteinorrhachia – nález proteinů v mozkomíšním moku
 proteinuria – přítomnost nadměrného množství proteinu v moči
 pyorrhoea – výtok hnisu z dásní
@@ -52,6 +64,7 @@ pyothorax – nahromadění hnisu v cavum pleurae
 pyuria – hnis v moči
 rhinorrhoea – vytékání "soplu" z nosu
 sialorrhoea – nadměrné slinění
+skotoma – výpadek v zorném poli
 steatorrhoea – přítomnost lipidů v stolici
 teleangiectasia – rozšíření kapilár
 uraemia – vysoká hladina močoviny v krvi
