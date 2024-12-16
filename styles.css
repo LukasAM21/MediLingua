@@ -171,15 +171,19 @@ tr:nth-child(even) {
 
 /* Quiz Container */
 #quizContainer {
-    display: block;
-    margin: 20px auto; /* Center the container horizontally */
+    display: none; /* Hide the container by default */
+}
+
+#quizContainer.active {
+    display: block; /* Show when active */
+    margin: 20px auto;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 80%; /* Reduce width for better centering */
-    max-width: 500px; /* Restrict the maximum width */
-    text-align: left; /* Align text inside the container */
+    width: 80%;
+    max-width: 500px;
+    text-align: left;
 }
 
 .question {
