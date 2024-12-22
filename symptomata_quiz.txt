@@ -4,8 +4,10 @@ amenorrhoea – nepřítomnost menstruace
 anaemia – málokrevnost
 anopia – úplná slepota
 anuria – absence tvorby moče
+apnoe – dočasné zastavení dýchání
 arthralgia – bolest kloubů
 atelectasis – kolaps plíce
+bradypnoe – znížená dechová frekvence
 bronchiectasia – rozšíření průdušek
 cephalalgia – bolest hlavy
 cholemesis – zvracení žluči
@@ -19,8 +21,10 @@ diplopia – dvojité vidění
 dorsalgia – bolest zad
 dysmenorrhoea – bolestivá menstruace
 dysopsia – obecný termín pro poruchu vidění
+dyspnoe – dušnost
 dysuria – bolest při močení
 enterostasis – stagnace tráveniny ve střevě
+eupnoe – normálné dýchání
 fluidothorax – všeobecný termín pro označení pleurálního výpotku
 galactorrhoea – abnormální produkce a výtok mléka
 galactostasis – zadržování mléka v mléčných žlázách
@@ -39,6 +43,8 @@ hemianopsia – slepost poloviny zorního pole
 heteropsia – nerovnaké vidění očí
 hyperemesis – silné mnohočetné zvracení
 hyperopia – dalekozrakost
+hyperpnoe – zvýšená hloubka a frekvence dýchání
+hypopnoe – plytké dýchání
 leukorrhea – bílý vaginální výtok
 lymphostasis – zhoršení nebo zástava lymfatické drainage
 metastasis – objevení novotvaru na dalším místě
@@ -50,6 +56,7 @@ nocturia – časté močení v noci
 nyktalopia – zhoršené vidění za šera nebo tmy
 odynophagia – bolest při polykání
 oliguria – snížená tvorba moče
+orthopnoe – nutnost dýchat v sedě nebo stoji
 otorrhoea – výtok z ucha
 pertussis – černý kašel
 photopsia – pocit záblesků bez světelné stimulace
@@ -64,8 +71,8 @@ pyothorax – nahromadění hnisu v cavum pleurae
 pyuria – hnis v moči
 rhinorrhoea – vytékání "soplu" z nosu
 sialorrhoea – nadměrné slinění
-skotoma – výpadek v zorném poli
 steatorrhoea – přítomnost lipidů v stolici
+tachypnoe – zvýšená dechová frekvence
 teleangiectasia – rozšíření kapilár
 uraemia – vysoká hladina močoviny v krvi
 urostasis – retence moči
